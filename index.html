@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Image2WP</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+    body {
+        font-family: 'Raleway', sans-serif;
+        text-align: center;
+        background: #ffeef2;
+        margin: 0;
+        padding: 20px;
+        color: #5c3d4f;
+    }
+    h2 {
+        color: #d63384;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px #fff;
+    }
+    textarea {
+        width: 45%;
+        height: 300px;
+        margin: 10px;
+        padding: 10px;
+        font-size: 14px;
+        border: 2px solid #ff99c8;
+        border-radius: 10px;
+        background: #fffafa;
+        resize: none;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    button {
+        padding: 10px 25px;
+        font-size: 16px;
+        background: #f196be;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 10px;
+        color: white;
+        font-weight: bold;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+</style>
+</head>
+<body>
+
+<h2>Chuyển link ảnh thành code HTML</h2>
+
+<div class="container">
+    <textarea id="input" placeholder="Dán link ảnh vào đây"></textarea>
+    <textarea id="output" placeholder="Code HTML sẽ xuất hiện ở đây"></textarea>
+</div>
+
+<button onclick="generateCode()"> Generate code</button>
+<button onclick="copyCode()"> Copy</button>
+
+<script>
+function generateCode() {
+    let input = document.getElementById("input").value.trim();
+    let links = input.split(/\s+/);
+    let html = '<div style="flex-direction:column;justify-content:center;width:100%;display:flex;">\n';
+    links.forEach(link => {
+        if(link) html += `<img src="${link}">\n`;
+    });
+    html += '</div>';
+    document.getElementById("output").value = html;
+}
+
+function copyCode() {
+    let output = document.getElementById("output");
+    output.select();
+    document.execCommand("copy");
+    alert("Đã copy code!");
+}
+</script>
+
+</body>
+</html>
